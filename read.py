@@ -1,11 +1,18 @@
 import numpy as np
 import cv2
+import pickle
 
 face_cascade = cv2.CascadeClassifier('haarcascade_frontalface_default.xml')
 recognizer =cv2.face.LBPHFaceRecognizer_create()
 recognizer.read("model.yml")
 
-vid =cv2.VideoCapture(0)
+labels={"person_name":1}
+with open("labels.pickle", 'rb') as f:
+    real_labels=pickle.load(f)
+    labels = {v:k for k,v in real_labels.items()}
+
+
+vid =cv2.VideoCapture("pics/vid2.mp4")
 
 while(True):
     isTrue, frame=vid.read()
@@ -16,8 +23,9 @@ while(True):
         roi_gray =gray[y:y+h,x:x+w]
 
         id_,conf =recognizer.predict(roi_gray)
-        if conf<=85:
-            print(id_)
+        if conf<100 :
+            # print(id_)
+            print(labels[id_])
         else:
             print('\a')
         color= (255,0,0)
