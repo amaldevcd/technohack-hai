@@ -12,7 +12,7 @@ with open("labels.pickle", 'rb') as f:
     labels = {v:k for k,v in real_labels.items()}
 
 
-vid =cv2.VideoCapture("pics/vid2.mp4")
+vid =cv2.VideoCapture(0)
 
 while(True):
     isTrue, frame=vid.read()
@@ -23,7 +23,7 @@ while(True):
         roi_gray =gray[y:y+h,x:x+w]
 
         id_,conf =recognizer.predict(roi_gray)
-        if conf<100 :
+        if conf<90:
             # print(id_)
             print(labels[id_])
         else:
