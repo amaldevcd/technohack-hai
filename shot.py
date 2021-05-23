@@ -1,3 +1,4 @@
+#program to capture image of the user
 import cv2 
 import time
 import os

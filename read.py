@@ -1,3 +1,4 @@
+#individual program to recognize the person ( different for different person)
 import numpy as np
 import cv2
 import pickle

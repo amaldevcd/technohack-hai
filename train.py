@@ -1,3 +1,4 @@
+#program to train models
 import os
 import numpy as np
 from PIL import Image
