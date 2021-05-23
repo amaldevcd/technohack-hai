@@ -1,6 +1,7 @@
 import numpy as np
 import cv2
 import pickle
+import time
 
 face_cascade = cv2.CascadeClassifier('haarcascade_frontalface_default.xml')
 recognizer =cv2.face.LBPHFaceRecognizer_create()
@@ -17,11 +18,13 @@ def most_frequent(list):
     return max(set(list), key = list.count)
 list =[]
 
-
+capture_duration = 10
 
 vid =cv2.VideoCapture("pics/vid3.mp4")
 
-while(True):
+start_time = time.time()
+
+while(int(time.time() - start_time) < capture_duration):
     isTrue, frame=vid.read()
     count=0
     if count>10:
@@ -46,7 +49,7 @@ while(True):
         x_end_cord= x+w
         y_end_cord= y+h
         cv2.rectangle(frame,(x,y),(x_end_cord,y_end_cord),color,stroke)
-    cv2.imshow('frame',gray)
+    cv2.imshow('frame',frame)
     if cv2.waitKey(20) & 0xFF == ord('q'):
         break
 if(most_frequent(list))=="elon-musk":
